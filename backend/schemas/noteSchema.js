@@ -1,6 +1,6 @@
 import { gql } from 'apollo-server-micro';
 
-module.exports = gql`
+export const noteSchema = gql`
 	type Note {
 		title: String!
 		body: String!

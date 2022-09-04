@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "apollo-server-core": "^3.10.2",
     "apollo-server-micro": "^3.10.2",
     "bcrypt": "^5.0.1",
     "dotenv": "^16.0.2",

@@ -35,7 +35,7 @@ export const resolvers = {
 			return todos;
 		},
 	},
-	Resolvers: {
+	Mutation: {
 		createUser: async (
 			parent,
 			{ email, password },
@@ -44,7 +44,11 @@ export const resolvers = {
 		) => {
 			const hashedPassword = bcrypt.hashSync(password, 12);
 			const user = await userModel.create({ email, password: hashedPassword });
-			return user;
+			const token = jwt.sign({ id: user.id }, process.env.PRIVATE_KEY, {
+				expiresIn: 24 * 10 * 50,
+			});
+
+			return { user, token };
 		},
 
 		login: async (
@@ -63,7 +67,7 @@ export const resolvers = {
 				throw new Error('password is not correct');
 			}
 
-			const token = jwt.sign({ id: user.id }, 'riddlemethis', {
+			const token = jwt.sign({ id: user.id }, process.env.PRIVATE_KEY, {
 				expiresIn: 24 * 10 * 50,
 			});
 

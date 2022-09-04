@@ -1,6 +1,6 @@
 import { gql } from 'apollo-server-micro';
 
-module.exports = gql`
+export const userSchema = gql`
 	type User {
 		email: String!
 		id: ID!
@@ -13,12 +13,17 @@ module.exports = gql`
 		userId: ID!
 	}
 
+	type UserWithToken {
+		token: String!
+		user: User!
+	}
+
 	extend type Query {
 		user(id: ID!): User!
 	}
 
 	extend type Mutation {
-		createUser(email: String!, password: String!): User!
+		createUser(email: String!, password: String!): UserWithToken!
 		login(email: String!, password: String!): Token!
 	}
 `;

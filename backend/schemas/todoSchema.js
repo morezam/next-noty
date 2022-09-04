@@ -1,6 +1,6 @@
 import { gql } from 'apollo-server-micro';
 
-module.exports = gql`
+export const todoSchema = gql`
 	type Todo {
 		title: String!
 		userId: ID!
