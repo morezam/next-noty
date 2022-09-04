@@ -1,0 +1,154 @@
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+
+export const resolvers = {
+	Query: {
+		user: async (parent, { id }, { models: { userModel } }, info) => {
+			const user = await userModel.findById({ _id: id }).exec();
+			return user;
+		},
+
+		note: async (parent, { id }, { models: { noteModel } }, info) => {
+			const note = await noteModel.findById({ _id: id }).exec();
+			return note;
+		},
+		allNotes: async (
+			parent,
+			args,
+			{ models: { noteModel }, authUser },
+			info
+		) => {
+			if (!authUser) {
+				throw new Error('you are not Authenticated, please sign up/in');
+			}
+			const notes = await noteModel.find({ userId: authUser.id }).exec();
+			return notes;
+		},
+
+		allTodos: async (
+			parent,
+			args,
+			{ models: { todoModel }, authUser },
+			info
+		) => {
+			const todos = await todoModel.find({ userId: authUser.id }).exec();
+			return todos;
+		},
+	},
+	Resolvers: {
+		createUser: async (
+			parent,
+			{ email, password },
+			{ models: { userModel } },
+			info
+		) => {
+			const hashedPassword = bcrypt.hashSync(password, 12);
+			const user = await userModel.create({ email, password: hashedPassword });
+			return user;
+		},
+
+		login: async (
+			parent,
+			{ email, password },
+			{ models: { userModel } },
+			info
+		) => {
+			const user = await userModel.findOne({ email }).exec();
+			if (!user) {
+				throw new Error('user not found');
+			}
+			const matchPasswords = bcrypt.compareSync(password, user.password);
+
+			if (!matchPasswords) {
+				throw new Error('password is not correct');
+			}
+
+			const token = jwt.sign({ id: user.id }, 'riddlemethis', {
+				expiresIn: 24 * 10 * 50,
+			});
+
+			return {
+				token,
+				userId: user.id,
+			};
+		},
+
+		createNote: async (
+			parent,
+			{ title, body },
+			{ models: { noteModel }, authUser },
+			info
+		) => {
+			const note = await noteModel.create({
+				title,
+				body,
+				userId: authUser.id,
+				updatedAt: new Date().toString(),
+				createdAt: new Date().toString(),
+			});
+			return note;
+		},
+		updateNote: async (
+			parent,
+			{ id, title, body },
+			{ models: { noteModel } },
+			info
+		) => {
+			const newNote = await noteModel.findByIdAndUpdate(id, {
+				title,
+				body,
+				updatedAt: new Date().toString(),
+			});
+			return newNote;
+		},
+
+		deleteNote: async (parent, { id }, { models: { noteModel } }, info) => {
+			const deletedNote = await noteModel.findByIdAndDelete(id);
+			return deletedNote;
+		},
+
+		createTodo: async (
+			parent,
+			{ title, completed },
+			{ models: { todoModel }, authUser },
+			info
+		) => {
+			const todo = await todoModel.create({
+				title,
+				completed,
+				userId: authUser.id,
+			});
+			return todo;
+		},
+
+		updateTodo: async (
+			parent,
+			{ id, title, completed },
+			{ models: { todoModel } },
+			info
+		) => {
+			const newTodo = await todoModel.findByIdAndUpdate(id, {
+				title,
+				completed,
+			});
+			return newTodo;
+		},
+
+		deleteTodo: async (parent, { id }, { models: { todoModel } }, info) => {
+			const deletedTodo = await todoModel.findByIdAndDelete(id);
+			return deletedTodo;
+		},
+	},
+
+	User: {
+		notes: async ({ id }, args, { models: { noteModel } }, info) => {
+			const notes = await noteModel.find({ userId: id });
+			return notes;
+		},
+
+		todos: async ({ id }, args, { models: { todoModel } }, info) => {
+			const todos = await todoModel.find({ userId: id });
+			return todos;
+		},
+	},
+};
