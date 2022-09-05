@@ -1,0 +1,18 @@
+export const lightTheme = {
+	body: '#FFF',
+	text: '#363537',
+	toggleBorder: '#FFF',
+	background: '#363537',
+
+	noteBack: 'var(--white-color)',
+	noteColor: 'var(--primary-color)',
+};
+
+export const darkTheme = {
+	body: '#363537',
+	text: '#FAFAFA',
+	toggleBorder: '#6B8096',
+	background: '#999',
+	noteBack: '#1b2021',
+	noteColor: '#feffde',
+};
