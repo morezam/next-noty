@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 export const InputWrapper = styled.div`
 	position: relative;
@@ -56,6 +55,6 @@ export const UserP = styled.p`
 	color: var(--white-color);
 `;
 
-export const UserLink = styled(Link)`
+export const UserLink = styled.a`
 	color: var(--secondary-color);
 `;

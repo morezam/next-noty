@@ -3,8 +3,11 @@ import { gql } from 'graphql-request';
 export const SIGN_UP = gql`
 	mutation ($email: String!, $password: String!) {
 		createUser(email: $email, password: $password) {
-			email
-			id
+			user {
+				email
+				id
+			}
+			token
 		}
 	}
 `;

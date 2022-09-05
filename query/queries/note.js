@@ -12,3 +12,15 @@ export const GET_NOTES = gql`
 		}
 	}
 `;
+
+export const GET_NOTE = gql`
+	query ($id: String!) {
+		note(id: $id) {
+			title
+			body
+			createdAt
+			updatedAt
+			id
+		}
+	}
+`;
