@@ -1,5 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
+import Spinner from '../spinner';
 import { useAuthContext } from '../../context/authContext';
 import { AuthActionKind } from '../../context/authReducer';
 import { client } from '../../lib/graphQlRequestDefault';
@@ -26,17 +27,13 @@ const UserSign = ({ signup }) => {
 		}
 	);
 
-	const onFormSubmit = e => {
-		e.preventDefault();
-		const data = { email: e.target[0].value, password: e.target[1].value };
-		mutate({
-			...data,
-		});
+	const onFormSubmit = data => {
+		mutate(data);
 	};
 
-	// if (isLoading) {
-	// 	return <Spinner />;
-	// }
+	if (isLoading) {
+		return <Spinner />;
+	}
 
 	return (
 		<div>

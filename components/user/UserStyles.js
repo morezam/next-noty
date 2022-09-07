@@ -1,5 +1,18 @@
 import styled from 'styled-components';
 
+export const UserForm = styled.form`
+	display: flex;
+	flex-direction: column;
+	width: 45rem;
+	height: 55rem;
+	margin-top: 5rem;
+	justify-content: space-evenly;
+	align-items: center;
+	background-color: var(--primary-color);
+	border-radius: 1rem;
+	padding: 0 3rem;
+`;
+
 export const InputWrapper = styled.div`
 	position: relative;
 	display: flex;
@@ -7,36 +20,19 @@ export const InputWrapper = styled.div`
 	align-items: center;
 `;
 
-export const FormWrapper = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: flex-end;
-	height: 95vh;
-`;
-
-export const UserForm = styled.form`
-	display: flex;
-	flex-direction: column;
-	height: 80%;
-	justify-content: space-evenly;
-	width: 50rem;
-	align-items: center;
-	background-color: var(--primary-color);
-	border-radius: 1rem;
-`;
-
 export const Label = styled.label`
 	align-self: flex-start;
 	color: var(--white-color);
 	font-size: 2rem;
+	margin-top: 1rem;
 `;
 
 export const Input = styled.input`
-	padding: 2rem 1.5rem;
+	padding: 1.5rem 1rem;
 	font-family: inherit;
-	margin: 2rem 0;
-	min-width: 26vw;
+	margin: 1rem 0;
 	font-size: 2rem;
+	min-width: 36rem;
 
 	&:focus {
 		outline: none;
@@ -44,7 +40,7 @@ export const Input = styled.input`
 `;
 
 export const PError = styled.p`
-	font-size: 2rem;
+	font-size: 1.8rem;
 	color: #e91e63;
 	padding: 0 2rem;
 	text-align: center;

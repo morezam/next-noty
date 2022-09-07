@@ -93,7 +93,7 @@ export const NoteWrapper = styled.div`
 		margin-top: 5rem;
 	}
 `;
-export const InputsWrapper = styled.div`
+export const InputsWrapper = styled.form`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -127,7 +127,7 @@ export const NoteInput = styled.textarea`
 		outline: none;
 	}
 `;
-export const NoteCheck = styled.div`
+export const NoteCheck = styled.button`
 	font-size: 4rem;
 	color: #29bb89;
 	z-index: 50;

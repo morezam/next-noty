@@ -11,7 +11,7 @@ export const noteSchema = gql`
 	}
 
 	extend type Query {
-		note(id: ID!): Note!
+		note(id: String!): Note!
 		allNotes: [Note!]!
 	}
 

@@ -5,18 +5,11 @@ import LogOut from '../user/LogOut';
 import { StyledLink, Ul } from './SideListStyles';
 
 const SideList = () => {
-	const authCtx = useContext(AuthContext);
-	const history = useHistory();
-	const onHomeClick = () => {
-		history.replace('/');
-		authCtx.logOut();
-	};
-
 	return (
 		<Ul>
 			<li>
 				<Link passHref href="/">
-					<StyledLink onClick={onHomeClick}>
+					<StyledLink>
 						<Logo />
 					</StyledLink>
 				</Link>
@@ -30,7 +23,7 @@ const SideList = () => {
 				</Link>
 			</li>
 			<li>
-				<Link passHref href="/panel/create">
+				<Link passHref href="/panel/notes/create">
 					<StyledLink>
 						<FaRegPlusSquare />
 						create new note

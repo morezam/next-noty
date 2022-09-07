@@ -1,5 +1,7 @@
+import LoginComponent from '../components/user';
+
 const Login = () => {
-	return <div>Login</div>;
+	return <LoginComponent signup={false} />;
 };
 
 export default Login;

@@ -1,26 +1,22 @@
-import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { client } from '../../lib/graphQlRequestDefault';
-import { FaCheckCircle, FaArrowAltCircleLeft } from 'react-icons/fa';
+import { FaArrowAltCircleLeft } from 'react-icons/fa';
+import { queryClient } from '../../lib/queryclient';
 import { UPDATE_NOTE } from '../../query/mutations/note';
 import { GET_NOTE } from '../../query/queries/note';
-import {
-	NoteWrapper,
-	InputsWrapper,
-	NoteInput,
-	NoteCheck,
-	TextArea,
-	BackLink,
-} from './NoteStyles';
+import { BackLink } from './NoteStyles';
+import Link from 'next/link';
+import DataRenderer from '../DataRenderer';
 
-const ShowNote = () => {
-	const { data, isSuccess } = useQuery(id => {
+const ShowNote = ({ id }) => {
+	const { data, isSuccess } = useQuery(['note', { id }], () => {
 		return client.request(GET_NOTE, { id });
 	});
 
-	const [newTitle, setNewTitle] = useState(isSuccess ? data.note.title : '');
-	const [newBody, setNewBody] = useState(isSuccess ? data.note.body : '');
+	if (isSuccess) {
+		console.log(data);
+	}
 
 	const mutation = useMutation(
 		({ id, title, body }) => {
@@ -28,45 +24,35 @@ const ShowNote = () => {
 		},
 		{
 			onSuccess() {
+				queryClient.invalidateQueries(['note', { id }]);
 				router.replace('/panel');
 			},
 		}
 	);
 	const router = useRouter();
 
-	const onDivClick = () => {
+	const onFormSubmit = formData => {
 		mutation.mutate({
-			id: props.match.params.id,
-			title: newTitle,
-			body: newBody,
+			id: formData.id,
+			title: formData.title,
+			body: formData.body,
 		});
 	};
 
 	return (
 		<>
-			<BackLink to="/panel">
-				<FaArrowAltCircleLeft />
-			</BackLink>
-			<NoteWrapper>
-				<InputsWrapper>
-					<NoteInput
-						value={newTitle}
-						onChange={e => setNewTitle(e.target.value)}
-						spellCheck="false"
-					/>
-					<TextArea
-						spellCheck="false"
-						value={newBody}
-						onChange={e => setNewBody(e.target.value)}></TextArea>
-					{newTitle !== title || newBody !== body ? (
-						<NoteCheck onClick={onDivClick}>
-							<FaCheckCircle />
-						</NoteCheck>
-					) : (
-						''
-					)}
-				</InputsWrapper>
-			</NoteWrapper>
+			<Link href="/panel" passHref>
+				<BackLink>
+					<FaArrowAltCircleLeft />
+				</BackLink>
+			</Link>
+			{isSuccess && (
+				<DataRenderer
+					create={false}
+					data={data.note}
+					onFormSubmit={onFormSubmit}
+				/>
+			)}
 		</>
 	);
 };

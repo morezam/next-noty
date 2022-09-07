@@ -6,12 +6,20 @@ import { CHANGE_COMPLETED } from '../../query/mutations/todo';
 import UpdateTodo from './UpdateTodo';
 import DeleteTodo from './DeleteTodo';
 import { CheckWrapper, TodoLi } from './TodoStyles';
+import { queryClient } from '../../lib/queryclient';
 
 const Todo = ({ todo }) => {
 	const [hide, setHide] = useState(true);
-	const mutation = useMutation(({ id, title, completed }) => {
-		return client.request(CHANGE_COMPLETED, { id, title, completed });
-	});
+	const mutation = useMutation(
+		({ id, title, completed }) => {
+			return client.request(CHANGE_COMPLETED, { id, title, completed });
+		},
+		{
+			onSuccess() {
+				queryClient.invalidateQueries(['todos']);
+			},
+		}
+	);
 	const onLiClick = todo => {
 		mutation.mutate({
 			id: todo.id,

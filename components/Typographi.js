@@ -15,7 +15,7 @@ export const H1 = styled.h1`
 	}
 `;
 export const H2 = styled.h2`
-	font-size: 3.5rem;
+	font-size: 2.5rem;
 	color: ${({ color }) => color || 'inherit'};
 	text-align: center;
 `;

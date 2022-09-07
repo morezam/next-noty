@@ -1,5 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { checkEmail } from '../lib/checkEmail';
+import { checkPassword } from '../lib/checkPassword';
 
 export const resolvers = {
 	Query: {
@@ -42,6 +44,19 @@ export const resolvers = {
 			{ models: { userModel } },
 			info
 		) => {
+			if (!email || !password) {
+				throw new Error('you must provide email and password');
+			}
+
+			if (!checkEmail(email)) {
+				throw new Error('Email is not valid');
+			}
+
+			if (!checkPassword(password)) {
+				throw new Error(
+					'Password must be at least 8 character long with on number and one special character'
+				);
+			}
 			const hashedPassword = bcrypt.hashSync(password, 12);
 			const user = await userModel.create({ email, password: hashedPassword });
 			const token = jwt.sign({ id: user.id }, process.env.PRIVATE_KEY, {
@@ -57,6 +72,9 @@ export const resolvers = {
 			{ models: { userModel } },
 			info
 		) => {
+			if (!email || !password) {
+				throw new Error('you must provide email and password');
+			}
 			const user = await userModel.findOne({ email }).exec();
 			if (!user) {
 				throw new Error('user not found');

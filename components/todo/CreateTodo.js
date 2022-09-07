@@ -1,16 +1,34 @@
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
+import { queryClient } from '../../lib/queryclient';
 import { client } from '../../lib/graphQlRequestDefault';
 import { CREATE_TODO } from '../../query/mutations/todo';
+import { useAuthContext } from '../../context/authContext';
 // import { GET_TODOS } from '../../query/queries/todo';
 import { Btn } from '../Btn';
 import { TodoInput, TodoForm } from './TodoStyles';
 
 const CreateTodo = () => {
 	const [title, setTitle] = useState('');
-	const mutation = useMutation(({ title, completed }) => {
-		return client.request(CREATE_TODO, { title, completed });
-	});
+
+	const { state } = useAuthContext();
+
+	const mutation = useMutation(
+		({ title, completed }) => {
+			return client.request(
+				CREATE_TODO,
+				{ title, completed },
+				{
+					token: state.token,
+				}
+			);
+		},
+		{
+			onSuccess() {
+				queryClient.invalidateQueries(['todos']);
+			},
+		}
+	);
 
 	const onButtonClick = () => {
 		mutation.mutate({

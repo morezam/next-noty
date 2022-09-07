@@ -30,7 +30,7 @@ const NoteList = ({ allNotes }) => {
 			return (
 				<>
 					<div style={{ position: 'relative' }} key={note.id}>
-						<Link passHref href={`/panel/note/${note.id}`}>
+						<Link passHref href={`/panel/notes/${note.id}`}>
 							<NoteLink>
 								<li>
 									<H4>{note.title}</H4>

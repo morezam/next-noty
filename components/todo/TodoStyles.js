@@ -60,7 +60,6 @@ export const CheckWrapper = styled.div`
 	margin-right: 1rem;
 	border: 2px solid var(--primary-color);
 	color: var(--primary-color);
-	/* background-color: var(--primary-color); */
 `;
 
 export const UpdateInput = styled.input`
