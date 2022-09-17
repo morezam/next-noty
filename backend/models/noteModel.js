@@ -10,11 +10,11 @@ const noteSchema = mongoose.Schema({
 		required: true,
 	},
 	createdAt: {
-		type: String,
+		type: Date,
 		required: true,
 	},
 	updatedAt: {
-		type: String,
+		type: Date,
 		required: true,
 	},
 	userId: {

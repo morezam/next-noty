@@ -6,9 +6,12 @@ export const LogoWrapper = styled.div`
 	display: flex;
 	align-items: center;
 	align-items: center;
-	/* font-family: 'Baloo Tammudu 2', cursive; */
+	font-family: AlfaSlabOne, cursive;
 
-	margin: 1rem;
+	color: var(--secondary-color);
+	position: absolute;
+	top: 4rem;
+	left: 4rem;
 `;
 
 const Logo = () => {

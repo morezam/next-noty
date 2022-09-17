@@ -4,7 +4,6 @@ import { queryClient } from '../../lib/queryclient';
 import { client } from '../../lib/graphQlRequestDefault';
 import { FaCheckCircle } from 'react-icons/fa';
 import { UPDATE_TODO } from '../../query/mutations/todo';
-// import { GET_TODOS } from '../../query/queries/todo';
 import { UpdateInput, TodoWrapper } from './TodoStyles';
 
 const Input = ({ todo, children }) => {

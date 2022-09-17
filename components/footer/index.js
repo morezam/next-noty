@@ -9,7 +9,7 @@ import {
 	FooterCopy,
 } from './FooterStyles';
 
-const index = () => {
+const FooterComponent = () => {
 	return (
 		<Footer>
 			<FooterContent>
@@ -37,4 +37,4 @@ const index = () => {
 	);
 };
 
-export default index;
+export default FooterComponent;

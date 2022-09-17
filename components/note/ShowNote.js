@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useQuery, useMutation } from '@tanstack/react-query';
+import Spinner from '../spinner';
 import { client } from '../../lib/graphQlRequestDefault';
 import { FaArrowAltCircleLeft } from 'react-icons/fa';
 import { queryClient } from '../../lib/queryclient';
@@ -10,13 +11,9 @@ import Link from 'next/link';
 import DataRenderer from '../DataRenderer';
 
 const ShowNote = ({ id }) => {
-	const { data, isSuccess } = useQuery(['note', { id }], () => {
+	const { data, isSuccess, isLoading } = useQuery(['note', { id }], () => {
 		return client.request(GET_NOTE, { id });
 	});
-
-	if (isSuccess) {
-		console.log(data);
-	}
 
 	const mutation = useMutation(
 		({ id, title, body }) => {
@@ -30,6 +27,14 @@ const ShowNote = ({ id }) => {
 		}
 	);
 	const router = useRouter();
+
+	if (isLoading) {
+		return <Spinner />;
+	}
+
+	if (mutation.isLoading) {
+		return <Spinner />;
+	}
 
 	const onFormSubmit = formData => {
 		mutation.mutate({

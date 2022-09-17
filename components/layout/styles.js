@@ -31,12 +31,3 @@ export const Sidebar = styled.aside`
 		display: block;
 	}
 `;
-
-export const ModeWrapper = styled.div`
-	position: absolute;
-	top: 2rem;
-	right: 2rem;
-	font-size: 3rem;
-	cursor: pointer;
-	color: ${({ theme }) => theme.noteColor};
-`;

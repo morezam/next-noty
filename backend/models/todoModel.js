@@ -12,6 +12,10 @@ const todoSchema = mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'user',
 	},
+	createdAt: {
+		type: Date,
+		default: Date.now,
+	},
 });
 
 export const todoModel =

@@ -1,26 +1,45 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import Nav from '../nav';
-import { HomeWrapper, HomeContent, HomeP, LinkButton } from './HomeStyles';
+import {
+	HomeWrapper,
+	HomeContent,
+	HomeP,
+	LinkButton,
+	LinkWrapper,
+} from './HomeStyles';
 import { H1 } from '../Typographi';
+import Features from '../features/Features';
+import FooterComponent from '../footer';
+import Logo from '../Logo';
 
 const Home = () => {
 	return (
 		<>
-			<Nav />
+			{/* <Nav /> */}
+			<Logo />
 			<HomeWrapper>
 				<HomeContent>
 					<H1>WELCOME TO NOTY</H1>
 					<HomeP>
-						Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae
-						recusandae, debitis dignissimos sapiente voluptate voluptatibus
-						consectetur, laudantium reiciendis explicabo porro alias sit
-						accusantium, cum omnis incidunt pariatur praesentium eos nostrum!
+						Hello to all of You. Noty is a Simple Web Application for creating,
+						deleting and updating notes and todos. you can create your account
+						by clicking on Sign up button or if you have one click on login
+						button
 					</HomeP>
-					<Link href="/signup" passHref>
-						<LinkButton>Sign up</LinkButton>
-					</Link>
+					<LinkWrapper>
+						<Link href="/signup" passHref>
+							<LinkButton bgcolor="var(--secondary-color)">Sign up</LinkButton>
+						</Link>
+						<Link href="/login" passHref>
+							<LinkButton bgcolor="var(--primary-color)">Login</LinkButton>
+						</Link>
+					</LinkWrapper>
 				</HomeContent>
+				<Image height={700} width={700} src="/Write.svg" alt="hero image" />
 			</HomeWrapper>
+			<Features />
+			<FooterComponent />
 		</>
 	);
 };

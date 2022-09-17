@@ -4,6 +4,7 @@ import CreateNoteComponent from '../../../components/note/CreateNote';
 import { client } from '../../../lib/graphQlRequestDefault';
 import { ADD_NOTE } from '../../../query/mutations/note';
 import { useAuthContext } from '../../../context/authContext';
+import Spinner from '../../../components/spinner';
 // import { GET_NOTES } from '../../query/queries/note';
 
 const CreateNote = () => {
@@ -26,6 +27,10 @@ const CreateNote = () => {
 			},
 		}
 	);
+
+	if (mutation.isLoading) {
+		return <Spinner />;
+	}
 
 	const onFormClick = data => {
 		mutation.mutate({ ...data });

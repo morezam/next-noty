@@ -23,7 +23,10 @@ export const resolvers = {
 			if (!authUser) {
 				throw new Error('you are not Authenticated, please sign up/in');
 			}
-			const notes = await noteModel.find({ userId: authUser.id }).exec();
+			const notes = await noteModel
+				.find({ userId: authUser.id })
+				.sort({ updatedAt: -1, createdAt: -1 })
+				.exec();
 			return notes;
 		},
 
@@ -33,7 +36,10 @@ export const resolvers = {
 			{ models: { todoModel }, authUser },
 			info
 		) => {
-			const todos = await todoModel.find({ userId: authUser.id }).exec();
+			const todos = await todoModel
+				.find({ userId: authUser.id })
+				.sort({ createdAt: -1 })
+				.exec();
 			return todos;
 		},
 	},
@@ -139,6 +145,7 @@ export const resolvers = {
 				title,
 				completed,
 				userId: authUser.id,
+				createdAt: Date.now(),
 			});
 			return todo;
 		},

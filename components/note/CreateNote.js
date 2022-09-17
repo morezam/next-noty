@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FaCheckCircle, FaArrowAltCircleLeft } from 'react-icons/fa';
+import { FaArrowAltCircleLeft } from 'react-icons/fa';
 import DataRenderer from '../DataRenderer';
 
 import { BackLink } from './NoteStyles';

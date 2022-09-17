@@ -7,7 +7,7 @@ const ShowNotes = ({ data }) => {
 	return (
 		<NotesWrapper>
 			<NoteCreate>
-				<Link href="/panel/create">
+				<Link href="/panel/notes/create">
 					<a>
 						<FaPlus />
 					</a>

@@ -3,9 +3,7 @@ import { gql } from 'graphql-request';
 export const CHANGE_COMPLETED = gql`
 	mutation ($id: ID!, $title: String!, $completed: Boolean!) {
 		updateTodo(id: $id, title: $title, completed: $completed) {
-			id
 			completed
-			__typename
 		}
 	}
 `;

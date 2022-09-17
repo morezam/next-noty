@@ -11,7 +11,23 @@ const DeleteTodo = ({ todoId }) => {
 			return client.request(DELETE_TODO, { id });
 		},
 		{
-			onSuccess() {
+			onMutate: async ({ id }) => {
+				await queryClient.cancelQueries(['todos']);
+
+				const previousTodos = queryClient.getQueryData(['todos']);
+
+				queryClient.setQueryData(['todos'], old => {
+					return {
+						allTodos: old.allTodos.filter(todo => todo.id !== id),
+					};
+				});
+
+				return { previousTodos };
+			},
+			onError: (err, newTodo, context) => {
+				queryClient.setQueryData(['todos'], context.previousTodos);
+			},
+			onSettled: () => {
 				queryClient.invalidateQueries(['todos']);
 			},
 		}
@@ -22,6 +38,7 @@ const DeleteTodo = ({ todoId }) => {
 			id,
 		});
 	};
+
 	return (
 		<FaTrash
 			onClick={() => onTodoDelete(todoId)}

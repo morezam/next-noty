@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { client } from '../../lib/graphQlRequestDefault';
+import Spinner from '../../components/spinner';
 import { GET_TODOS } from '../../query/queries/todo';
 import TodoComponent from '../../components/todo';
 
 const Todos = () => {
-	const { data, loading, isSuccess } = useQuery(['todos'], () => {
+	const { data, isSuccess, isLoading } = useQuery(['todos'], () => {
 		return client.request(
 			GET_TODOS,
 			{},
@@ -13,9 +14,7 @@ const Todos = () => {
 			}
 		);
 	});
-	if (loading) {
-		return <p>Loading ..</p>;
-	}
+
 	return <>{isSuccess ? <TodoComponent data={data} /> : ''}</>;
 };
 

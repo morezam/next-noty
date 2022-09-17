@@ -1,14 +1,12 @@
 import styled from 'styled-components';
 
 export const H1 = styled.h1`
-	font-size: 7rem;
+	font-size: 6rem;
 	text-align: center;
 	line-height: 1.2;
 	margin-top: 10rem;
 
-	color: #fff;
-	/* font-family: 'Krona One', sans-serif; */
-	font-family: 'Baloo Tammudu 2', cursive;
+	color: var(--secondary-color);
 
 	@media screen and (min-width: 600px) {
 		margin-top: 0;

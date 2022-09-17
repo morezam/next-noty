@@ -1,17 +1,16 @@
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
+import Spinner from '../../components/spinner';
 import { GET_NOTES } from '../../query/queries/note';
 import { client } from '../../lib/graphQlRequestDefault';
 import { useAuthContext } from '../../context/authContext';
-import { Other, Parent, Sidebar } from '../../components/panel/PanelStyles';
-import SideList from '../../components/panel/SideList';
-import PanelNav from '../../components/panel/PanelNav';
 import ShowNotes from '../../components/note/ShowNotes';
+import PanelLayout from '../../components/layout';
 
 const Panel = () => {
 	const { state } = useAuthContext();
 
-	const { data, loading, isSuccess } = useQuery(['notes'], () => {
+	const { data, isLoading, isSuccess } = useQuery(['notes'], () => {
 		return client.request(
 			GET_NOTES,
 			{},
@@ -21,11 +20,10 @@ const Panel = () => {
 		);
 	});
 
-	if (loading) {
-		return <p>Loading ...</p>;
+	if (isLoading) {
+		return <Spinner />;
 	}
 
-	console.log(state);
 	if (!state.token) {
 		return (
 			<div>
@@ -40,15 +38,7 @@ const Panel = () => {
 			</div>
 		);
 	}
-	return (
-		<Parent>
-			<Sidebar>
-				<SideList />
-			</Sidebar>
-			<PanelNav />
-			<Other>{isSuccess && <ShowNotes data={data} />}</Other>
-		</Parent>
-	);
+	return <PanelLayout>{isSuccess && <ShowNotes data={data} />}</PanelLayout>;
 };
 
 export default Panel;

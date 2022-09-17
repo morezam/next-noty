@@ -5,7 +5,6 @@ import { useAuthContext } from '../../context/authContext';
 import { AuthActionKind } from '../../context/authReducer';
 import { client } from '../../lib/graphQlRequestDefault';
 import { SIGN_UP, LOG_IN } from '../../query/mutations/user';
-// import Spinner from '../spinner/Spinner';
 import SignupForm from './SignupForm';
 
 const UserSign = ({ signup }) => {

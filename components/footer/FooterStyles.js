@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Footer = styled.footer`
 	display: flex;
 	flex-direction: column;
-	background-color: #1b2021;
+	background-color: var(--secondary-color);
 	@media only screen and (min-width: 600px) {
 		height: 25rem;
 		justify-content: space-around;

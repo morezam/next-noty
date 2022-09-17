@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
+
     *,
     *::before,
     *::after{
@@ -28,15 +29,20 @@ const GlobalStyle = createGlobalStyle`
 
     :root{
         --primary-color: #393e46; //rgb(57, 62, 70)
-        --secondary-color: #aad8d3; //rgb(170, 216, 211)
+        --secondary-color: #50baad; //rgb(170, 216, 211)
         --gray-color: #eeeeee; //rgb(238, 238, 238)
         --white-color: #f7f3e9; //rgb(247, 243, 233)
+    }
+
+    @font-face {
+        font-family: AlfaSlabOne;
+        src: url(/FredokaOne-Regular.ttf);
     }
 
     h1,
     h2,
     h3{
-        font-family: 'Krona One', sans-serif;
+        font-family: AlfaSlabOne, cursive;
     }
 `;
 
