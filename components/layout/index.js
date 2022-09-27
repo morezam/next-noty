@@ -8,7 +8,7 @@ const PanelLayout = ({ children }) => {
 			<Sidebar>
 				<SideList />
 			</Sidebar>
-			{/* <PanelNav /> */}
+			<PanelNav />
 			<Other>{children}</Other>
 		</Parent>
 	);

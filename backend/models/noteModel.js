@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
 
 const noteSchema = mongoose.Schema({
-	title: {
+	body: {
 		type: String,
 		required: true,
 	},
-	body: {
+	excerpt: {
 		type: String,
 		required: true,
 	},

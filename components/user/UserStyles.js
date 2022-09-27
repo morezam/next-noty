@@ -3,21 +3,20 @@ import styled from 'styled-components';
 export const UserForm = styled.form`
 	display: flex;
 	flex-direction: column;
-	width: 45rem;
+	max-width: 40rem;
 	height: 55rem;
 	margin-top: 5rem;
 	justify-content: space-evenly;
-	align-items: center;
 	background-color: var(--primary-color);
 	border-radius: 1rem;
 	padding: 0 3rem;
+	position: relative;
 `;
 
 export const InputWrapper = styled.div`
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
 `;
 
 export const Label = styled.label`
@@ -32,7 +31,6 @@ export const Input = styled.input`
 	font-family: inherit;
 	margin: 1rem 0;
 	font-size: 2rem;
-	min-width: 36rem;
 
 	&:focus {
 		outline: none;
@@ -44,6 +42,11 @@ export const PError = styled.p`
 	color: #e91e63;
 	padding: 0 2rem;
 	text-align: center;
+`;
+
+export const SpinnerWrapeer = styled.div`
+	position: absolute;
+	bottom: 1rem;
 `;
 
 export const UserP = styled.p`

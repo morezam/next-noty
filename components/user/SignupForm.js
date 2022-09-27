@@ -1,10 +1,11 @@
-import { InputWrapper, UserForm, Label, PError } from './UserStyles';
+import { InputWrapper, UserForm, SpinnerWrapeer, PError } from './UserStyles';
 import Input from '../Input';
 import { Btn } from '../Btn';
 import { H2 } from '../Typographi';
 import { useForm } from 'react-hook-form';
+import Spinner from '../spinner';
 
-const SignupForm = ({ onFormSubmit, signup, errorMessage }) => {
+const SignupForm = ({ onFormSubmit, signup, errorMessage, isLoading }) => {
 	const {
 		register,
 		handleSubmit,
@@ -17,6 +18,7 @@ const SignupForm = ({ onFormSubmit, signup, errorMessage }) => {
 				display: 'flex',
 				justifyContent: 'center',
 				alignItems: 'center',
+				position: 'relative',
 			}}>
 			<UserForm onSubmit={handleSubmit(onFormSubmit)}>
 				<H2 color="var(--white-color)">
@@ -43,7 +45,14 @@ const SignupForm = ({ onFormSubmit, signup, errorMessage }) => {
 					/>
 				</InputWrapper>
 
-				<Btn secondary>{signup ? 'Signup' : 'Login'}</Btn>
+				{isLoading ? (
+					<Btn primary>
+						<Spinner height="1rem" />
+					</Btn>
+				) : (
+					<Btn secondary>{signup ? 'Signup' : 'Login'}</Btn>
+				)}
+
 				{errorMessage && <PError>{errorMessage}</PError>}
 			</UserForm>
 		</div>

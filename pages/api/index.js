@@ -42,6 +42,7 @@ const server = new ApolloServer({
 
 const startServer = server.start().then(() => {
 	mongoose.connect(`${process.env.MONGODB_CONNECTION_URL}`);
+	// mongoose.connect(``);
 });
 
 export default async function handler(req, res) {

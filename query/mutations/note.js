@@ -1,9 +1,10 @@
 import { gql } from 'graphql-request';
 
 export const ADD_NOTE = gql`
-	mutation ($title: String!, $body: String!) {
-		createNote(title: $title, body: $body) {
-			title
+	mutation ($body: String!, $excerpt: String!) {
+		createNote(body: $body, excerpt: $excerpt) {
+			id
+			excerpt
 		}
 	}
 `;
@@ -11,17 +12,15 @@ export const ADD_NOTE = gql`
 export const DELETE_NOTE = gql`
 	mutation ($id: ID!) {
 		deleteNote(id: $id) {
-			title
 			id
 		}
 	}
 `;
 
 export const UPDATE_NOTE = gql`
-	mutation ($id: ID!, $title: String!, $body: String!) {
-		updateNote(id: $id, title: $title, body: $body) {
-			title
-			body
+	mutation ($id: ID!, $body: String!, $excerpt: String!) {
+		updateNote(id: $id, body: $body, excerpt: $excerpt) {
+			excerpt
 			id
 		}
 	}

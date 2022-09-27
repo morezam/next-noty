@@ -3,6 +3,8 @@ import styled from 'styled-components';
 export const NotesWrapper = styled.div`
 	/* padding: 10rem 10rem 10rem 2rem; */
 	padding: 3rem;
+	display: flex;
+	flex-direction: column;
 `;
 
 export const NoteUl = styled.ul`
@@ -24,6 +26,7 @@ export const NoteUl = styled.ul`
 export const NoteLink = styled.a`
 	text-decoration: none;
 	/* width: 30rem; */
+	overflow: hidden;
 	height: 25rem;
 	background-color: ${({ theme }) => theme.noteBack};
 	display: block;
@@ -87,10 +90,15 @@ export const NoteTime = styled.p`
 export const NoteWrapper = styled.div`
 	position: relative;
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
-	margin-top: 10rem;
+	/* align-items: center; */
+	padding: 10rem 5rem;
 	@media only screen and (min-width: 1000px) {
-		margin-top: 5rem;
+		padding-top: 5rem;
+	}
+	@media only screen and (max-width: 400px) {
+		padding: 10rem 2rem;
 	}
 `;
 export const InputsWrapper = styled.form`
@@ -182,7 +190,7 @@ export const BackLink = styled.a`
 	text-decoration: none;
 	cursor: pointer;
 	font-size: 3rem;
-	position: relative;
+	position: absolute;
 	width: 3rem;
 	top: 2rem;
 	z-index: 1000;

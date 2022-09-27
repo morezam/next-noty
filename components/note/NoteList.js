@@ -10,6 +10,7 @@ import { DELETE_NOTE } from '../../query/mutations/note';
 import { H2, H4 } from '../Typographi';
 import { DeleteIcon, NoteLink, NoteP, NoteTime } from './NoteStyles';
 import { Btn } from '../Btn';
+import Editor from '../editor';
 
 const NoteList = ({ allNotes }) => {
 	const [noteId, setNoteId] = useState('');
@@ -57,13 +58,12 @@ const NoteList = ({ allNotes }) => {
 				<div style={{ position: 'relative' }}>
 					<Link passHref href={`/panel/notes/${note.id}`}>
 						<NoteLink>
-							<li>
-								<H4>{note.title}</H4>
-								<NoteP>
-									{note.body.length > 100
-										? note.body.substring(0, 100) + '...'
-										: note.body.substring(0, 100) + ''}
-								</NoteP>
+							<li style={{ fontSize: '1.7rem' }}>
+								<Editor
+									initialEditorState={note.excerpt}
+									readMode={true}
+									editable={false}
+								/>
 							</li>
 							<NoteTime>
 								{fromnow(+note.updatedAt, {

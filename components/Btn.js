@@ -45,7 +45,6 @@ export const Btn = styled.button`
 				color: var(--primary-color);
 			}
 			padding: 2rem 3rem;
-			min-width: 36rem;
 			font-size: 2rem;
 		`}
 

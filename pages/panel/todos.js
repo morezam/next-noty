@@ -2,8 +2,10 @@ import { useQuery } from '@tanstack/react-query';
 import { client } from '../../lib/graphQlRequestDefault';
 import Spinner from '../../components/spinner';
 import { GET_TODOS } from '../../query/queries/todo';
-import TodoComponent from '../../components/todo';
+import PanelLayout from '../../components/layout';
+import { lazy, Suspense } from 'react';
 
+const TodoComponent = lazy(() => import('../../components/todo'));
 const Todos = () => {
 	const { data, isSuccess, isLoading } = useQuery(['todos'], () => {
 		return client.request(
@@ -15,7 +17,17 @@ const Todos = () => {
 		);
 	});
 
-	return <>{isSuccess ? <TodoComponent data={data} /> : ''}</>;
+	return (
+		<PanelLayout>
+			{isSuccess ? (
+				<Suspense fallback={<Spinner />}>
+					<TodoComponent data={data} />
+				</Suspense>
+			) : (
+				''
+			)}
+		</PanelLayout>
+	);
 };
 
 export default Todos;

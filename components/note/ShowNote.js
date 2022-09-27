@@ -16,8 +16,8 @@ const ShowNote = ({ id }) => {
 	});
 
 	const mutation = useMutation(
-		({ id, title, body }) => {
-			return client.request(UPDATE_NOTE, { id, title, body });
+		newNote => {
+			return client.request(UPDATE_NOTE, newNote);
 		},
 		{
 			onSuccess() {
@@ -36,11 +36,10 @@ const ShowNote = ({ id }) => {
 		return <Spinner />;
 	}
 
-	const onFormSubmit = formData => {
+	const onFormSubmit = data => {
 		mutation.mutate({
-			id: formData.id,
-			title: formData.title,
-			body: formData.body,
+			id,
+			...data,
 		});
 	};
 

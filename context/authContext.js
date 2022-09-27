@@ -6,15 +6,13 @@ import React, {
 	useEffect,
 } from 'react';
 
-import { AuthActionKind, AuthReducer, initialState } from './authReducer';
+import { AuthActionKind, AuthReducer } from './authReducer';
 
-const AuthContext = createContext({
-	state: initialState,
-	dispatch: () => {},
-});
+const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
-	const [state, dispatch] = useReducer(AuthReducer, initialState);
+	const [state, dispatch] = useReducer(AuthReducer, { token: null });
+	const { token } = state;
 
 	useEffect(() => {
 		const token = localStorage.getItem('token');
@@ -26,10 +24,10 @@ export const AuthContextProvider = ({ children }) => {
 	}, []);
 
 	useEffect(() => {
-		state.token !== null
-			? localStorage.setItem('token', state.token)
+		token
+			? localStorage.setItem('token', token)
 			: localStorage.removeItem('token');
-	}, [state.token]);
+	}, [token]);
 
 	const contextValue = useMemo(() => {
 		return { state, dispatch };

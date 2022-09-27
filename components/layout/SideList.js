@@ -7,11 +7,11 @@ import { StyledLink, Ul } from './SideListStyles';
 const SideList = () => {
 	return (
 		<Ul>
-			<li>
-				<Link passHref href="/">
-					<StyledLink>
+			<li style={{ paddingBottom: '2rem' }}>
+				<Link href="/">
+					<a>
 						<Logo />
-					</StyledLink>
+					</a>
 				</Link>
 			</li>
 			<li>

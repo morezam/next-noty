@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './spinner.module.css';
 
-const Spinner = () => {
+const Spinner = ({ height = '100vh' }) => {
 	return (
-		<div className={styles.wrapper}>
+		<div className={styles.wrapper} style={{ height }}>
 			<div className={styles.spinner}>
 				<div className={styles.spinner1}></div>
 				<div className={styles.spinner2}></div>

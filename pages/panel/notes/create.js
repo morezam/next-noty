@@ -3,23 +3,20 @@ import { useRouter } from 'next/router';
 import CreateNoteComponent from '../../../components/note/CreateNote';
 import { client } from '../../../lib/graphQlRequestDefault';
 import { ADD_NOTE } from '../../../query/mutations/note';
+import ParentLayout from '../../../components/layout';
 import { useAuthContext } from '../../../context/authContext';
 import Spinner from '../../../components/spinner';
-// import { GET_NOTES } from '../../query/queries/note';
+import { useCallback } from 'react';
 
 const CreateNote = () => {
 	const router = useRouter();
 	const { state } = useAuthContext();
 
 	const mutation = useMutation(
-		({ title, body }) => {
-			return client.request(
-				ADD_NOTE,
-				{ title, body },
-				{
-					token: state.token,
-				}
-			);
+		data => {
+			return client.request(ADD_NOTE, data, {
+				token: state.token,
+			});
 		},
 		{
 			onSuccess() {
@@ -27,15 +24,22 @@ const CreateNote = () => {
 			},
 		}
 	);
+	const onFormClick = useCallback(
+		data => {
+			mutation.mutate(data);
+		},
+		[mutation]
+	);
 
 	if (mutation.isLoading) {
 		return <Spinner />;
 	}
 
-	const onFormClick = data => {
-		mutation.mutate({ ...data });
-	};
-	return <CreateNoteComponent onFormClick={onFormClick} />;
+	return (
+		<ParentLayout>
+			<CreateNoteComponent onFormClick={onFormClick} />
+		</ParentLayout>
+	);
 };
 
 export default CreateNote;

@@ -2,8 +2,8 @@ import { gql } from 'apollo-server-micro';
 
 export const noteSchema = gql`
 	type Note {
-		title: String!
 		body: String!
+		excerpt: String!
 		createdAt: String!
 		updatedAt: String
 		id: ID!
@@ -16,8 +16,8 @@ export const noteSchema = gql`
 	}
 
 	extend type Mutation {
-		createNote(title: String!, body: String!): Note!
-		updateNote(id: ID!, title: String, body: String): Note!
+		createNote(body: String!, excerpt: String!): Note!
+		updateNote(id: ID!, excerpt: String, body: String): Note!
 		deleteNote(id: ID!): Note
 	}
 `;

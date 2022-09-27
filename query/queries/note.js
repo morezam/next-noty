@@ -3,8 +3,7 @@ import { gql } from 'graphql-request';
 export const GET_NOTES = gql`
 	query {
 		allNotes {
-			title
-			body
+			excerpt
 			createdAt
 			updatedAt
 			id
@@ -16,8 +15,8 @@ export const GET_NOTES = gql`
 export const GET_NOTE = gql`
 	query ($id: String!) {
 		note(id: $id) {
-			title
 			body
+			excerpt
 			createdAt
 			updatedAt
 			id

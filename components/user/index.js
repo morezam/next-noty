@@ -21,7 +21,7 @@ const UserSign = ({ signup }) => {
 					type: AuthActionKind.LOGIN,
 					payload: signup ? data.createUser.token : data.login.token,
 				});
-				router.push('/panel');
+				router.replace('/panel');
 			},
 		}
 	);
@@ -30,16 +30,13 @@ const UserSign = ({ signup }) => {
 		mutate(data);
 	};
 
-	if (isLoading) {
-		return <Spinner />;
-	}
-
 	return (
 		<div>
 			<SignupForm
 				signup={signup}
 				onFormSubmit={onFormSubmit}
 				errorMessage={isError ? error.response.errors[0].message : null}
+				isLoading={isLoading}
 			/>
 		</div>
 	);

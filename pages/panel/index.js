@@ -4,13 +4,15 @@ import Spinner from '../../components/spinner';
 import { GET_NOTES } from '../../query/queries/note';
 import { client } from '../../lib/graphQlRequestDefault';
 import { useAuthContext } from '../../context/authContext';
-import ShowNotes from '../../components/note/ShowNotes';
 import PanelLayout from '../../components/layout';
+import { lazy, Suspense } from 'react';
+
+const ShowNotes = lazy(() => import('../../components/note/ShowNotes'));
 
 const Panel = () => {
 	const { state } = useAuthContext();
 
-	const { data, isLoading, isSuccess } = useQuery(['notes'], () => {
+	const { data, isSuccess, isLoading } = useQuery(['notes'], () => {
 		return client.request(
 			GET_NOTES,
 			{},
@@ -20,25 +22,18 @@ const Panel = () => {
 		);
 	});
 
-	if (isLoading) {
+	if (!state.token || isLoading) {
 		return <Spinner />;
 	}
-
-	if (!state.token) {
-		return (
-			<div>
-				<Link href="/signup">
-					<a>Sign up</a>
-				</Link>{' '}
-				or{' '}
-				<Link href="/login">
-					<a>Login</a>
-				</Link>{' '}
-				first
-			</div>
-		);
-	}
-	return <PanelLayout>{isSuccess && <ShowNotes data={data} />}</PanelLayout>;
+	return (
+		<PanelLayout>
+			{isSuccess && (
+				<Suspense fallback={<Spinner />}>
+					<ShowNotes data={data} />
+				</Suspense>
+			)}
+		</PanelLayout>
+	);
 };
 
 export default Panel;

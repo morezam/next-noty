@@ -103,13 +103,13 @@ export const resolvers = {
 
 		createNote: async (
 			parent,
-			{ title, body },
+			{ body, excerpt },
 			{ models: { noteModel }, authUser },
 			info
 		) => {
 			const note = await noteModel.create({
-				title,
 				body,
+				excerpt,
 				userId: authUser.id,
 				updatedAt: new Date().toString(),
 				createdAt: new Date().toString(),
@@ -118,13 +118,13 @@ export const resolvers = {
 		},
 		updateNote: async (
 			parent,
-			{ id, title, body },
+			{ id, body, excerpt },
 			{ models: { noteModel } },
 			info
 		) => {
 			const newNote = await noteModel.findByIdAndUpdate(id, {
-				title,
 				body,
+				excerpt,
 				updatedAt: new Date().toString(),
 			});
 			return newNote;

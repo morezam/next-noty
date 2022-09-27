@@ -1,30 +1,39 @@
-import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { useCallback, useRef } from 'react';
 import { Btn } from './Btn';
-import {
-	InputsWrapper,
-	NoteInput,
-	NoteWrapper,
-	TextArea,
-} from './note/NoteStyles';
+import Editor from './editor';
+import { NoteWrapper } from './note/NoteStyles';
 
-export default function DataRenderer({ onFormSubmit, create, data, children }) {
-	const { register, handleSubmit, reset } = useForm();
+export default function DataRenderer({ onFormSubmit, create, data }) {
+	const editorStateRef = useRef();
 
-	useEffect(() => {
-		if (data) {
-			reset(data);
-		}
-	}, [data, reset]);
+	const onEditorSubmit = useCallback(
+		editorState => {
+			const editorJsonState = editorState.toJSON();
+			const editorStringState = JSON.stringify(editorJsonState);
+			const rootChildren = editorJsonState.root.children;
+			const excerpt =
+				rootChildren.length <= 4 ? rootChildren : rootChildren.slice(0, 5);
+
+			const excerptObject = {
+				root: { ...editorJsonState.root, children: excerpt },
+			};
+			const stringExcerpt = JSON.stringify(excerptObject);
+			onFormSubmit({ body: editorStringState, excerpt: stringExcerpt });
+		},
+		[onFormSubmit]
+	);
 
 	return (
-		<NoteWrapper>
-			<InputsWrapper onSubmit={handleSubmit(onFormSubmit)}>
-				<NoteInput {...register('title')} placeholder="Title" />
-				<TextArea {...register('body')} placeholder="Write Here...." />
-				{children}
-				<Btn secondary>{create ? 'Create' : 'Update'}</Btn>
-			</InputsWrapper>
-		</NoteWrapper>
+		<div style={{ display: 'flex', justifyContent: 'center' }}>
+			<NoteWrapper>
+				<Editor
+					editorStateRef={editorStateRef}
+					initialEditorState={data ? data.body : null}
+				/>
+				<Btn secondary onClick={() => onEditorSubmit(editorStateRef.current)}>
+					{create ? 'Create' : 'Update'}
+				</Btn>
+			</NoteWrapper>
+		</div>
 	);
 }
