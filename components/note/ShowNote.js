@@ -16,13 +16,35 @@ const ShowNote = ({ id }) => {
 	});
 
 	const mutation = useMutation(
-		newNote => {
-			return client.request(UPDATE_NOTE, newNote);
+		updatedNote => {
+			return client.request(UPDATE_NOTE, updatedNote);
 		},
 		{
+			onMutate: async updatedNote => {
+				await queryClient.cancelQueries(['notes']);
+				const previuosNotes = queryClient.getQueryData(['notes']);
+				queryClient.setQueryData(['notes'], prevNotes => {
+					return {
+						allNotes: prevNotes.allNotes.map(note => {
+							if (note.id === updatedNote.id) {
+								return updatedNote;
+							}
+							return note;
+						}),
+					};
+				});
+
+				return { previuosNotes };
+			},
+			onError(err, updatedNote, context) {
+				queryClient.setQueryData(['notes'], context.previuosNotes);
+			},
+			onSettled() {
+				queryClient.invalidateQueries(['notes']);
+			},
 			onSuccess() {
-				queryClient.invalidateQueries(['note', { id }]);
 				router.replace('/panel');
+				queryClient.invalidateQueries(['note', { id }]);
 			},
 		}
 	);

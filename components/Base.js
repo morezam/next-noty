@@ -42,7 +42,8 @@ const GlobalStyle = createGlobalStyle`
     h1,
     h2,
     h3{
-        font-family: AlfaSlabOne, cursive;
+        font-family: AlfaSlabOne,'Lucida Sans';
+        font-weight: 900;
     }
 `;
 

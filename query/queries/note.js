@@ -7,7 +7,6 @@ export const GET_NOTES = gql`
 			createdAt
 			updatedAt
 			id
-			userId
 		}
 	}
 `;

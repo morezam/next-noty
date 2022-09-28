@@ -24,7 +24,26 @@ const CreateTodo = () => {
 			);
 		},
 		{
-			onSuccess: () => {
+			onMutate: async newTodo => {
+				await queryClient.cancelQueries(['todos']);
+
+				const previousTodos = queryClient.getQueryData(['todos']);
+
+				queryClient.setQueryData(['todos'], old => {
+					return {
+						allTodos: [
+							{ id: `${Date.now()} ${newTodo.title}`, ...newTodo },
+							...old.allTodos,
+						],
+					};
+				});
+
+				return { previousTodos };
+			},
+			onError: (err, newTodo, context) => {
+				queryClient.setQueryData(['todos'], context.previousTodos);
+			},
+			onSettled: () => {
 				queryClient.invalidateQueries(['todos']);
 			},
 		}

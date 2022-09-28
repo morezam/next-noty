@@ -22,7 +22,7 @@ const Todo = ({ todo }) => {
 					return {
 						allTodos: old.allTodos.map(todo => {
 							if (todo.id === updatedTodo.id) {
-								return { ...updatedTodo };
+								return updatedTodo;
 							}
 							return todo;
 						}),

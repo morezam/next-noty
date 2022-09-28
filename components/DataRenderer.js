@@ -17,6 +17,7 @@ export default function DataRenderer({ onFormSubmit, create, data }) {
 			const excerptObject = {
 				root: { ...editorJsonState.root, children: excerpt },
 			};
+			console.log({ body: editorJsonState, excerpt: excerptObject });
 			const stringExcerpt = JSON.stringify(excerptObject);
 			onFormSubmit({ body: editorStringState, excerpt: stringExcerpt });
 		},
