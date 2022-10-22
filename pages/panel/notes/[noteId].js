@@ -1,6 +1,7 @@
+import Head from 'next/head';
 import { useRouter } from 'next/router';
-import PanelLayout from '../../../components/layout';
-import ShowNote from '../../../components/note/ShowNote';
+import PanelLayout from '@components/layout';
+import ShowNote from '@components/note/ShowNote';
 
 const Note = () => {
 	const router = useRouter();
@@ -8,6 +9,9 @@ const Note = () => {
 
 	return (
 		<PanelLayout>
+			<Head>
+				<title>Note</title>
+			</Head>
 			<ShowNote id={noteId} />
 		</PanelLayout>
 	);

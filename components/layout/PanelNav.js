@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { FaEllipsisV, FaRegListAlt, FaTasks } from 'react-icons/fa';
-// import Modes from '../Modes';
 import LogOut from '../user/LogOut';
 import { NavTop, LinkNav, NavListWrap, NavList } from './PanelNavStyles';
 
@@ -27,7 +26,6 @@ const PanelNav = () => {
 			</LinkNav>
 			<NavListWrap open={open} onClick={() => setOpen(!open)}>
 				<NavList>
-					{/* <Modes withText /> */}
 					<LogOut />
 				</NavList>
 			</NavListWrap>

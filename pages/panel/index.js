@@ -1,13 +1,16 @@
-import Link from 'next/link';
+import { Suspense } from 'react';
+import dynamic from 'next/dynamic';
+import Head from 'next/head';
 import { useQuery } from '@tanstack/react-query';
-import Spinner from '../../components/spinner';
-import { GET_NOTES } from '../../query/queries/note';
-import { client } from '../../lib/graphQlRequestDefault';
-import { useAuthContext } from '../../context/authContext';
-import PanelLayout from '../../components/layout';
-import { lazy, Suspense } from 'react';
+import Spinner from '@components/spinner';
+import { GET_NOTES } from '@query/queries/note';
+import { client } from '@lib/graphQlRequestDefault';
+import { useAuthContext } from '@context/authContext';
+import PanelLayout from '@components/layout';
 
-const ShowNotes = lazy(() => import('../../components/note/ShowNotes'));
+const ShowNotes = dynamic(() => import('@components/note/ShowNotes'), {
+	suspense: true,
+});
 
 const Panel = () => {
 	const { state } = useAuthContext();
@@ -27,6 +30,11 @@ const Panel = () => {
 	}
 	return (
 		<PanelLayout>
+			<Head>
+				<title>Welcome to your panel.</title>
+				<meta name="description" content="Welcome to your panel. Enjoy Noty." />
+				<link rel="icon" type="image/svg+xml" href="/logo.svg" />
+			</Head>
 			{isSuccess && (
 				<Suspense fallback={<Spinner />}>
 					<ShowNotes data={data} />

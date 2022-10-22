@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { checkEmail } from '../lib/checkEmail';
-import { checkPassword } from '../lib/checkPassword';
+import { checkEmail } from '@lib/checkEmail';
+import { checkPassword } from '@lib/checkPassword';
 
 export const resolvers = {
 	Query: {

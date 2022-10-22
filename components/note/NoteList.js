@@ -7,7 +7,7 @@ import Modal from '../modal';
 import { client } from '../../lib/graphQlRequestDefault';
 import { FaTrash } from 'react-icons/fa';
 import { DELETE_NOTE } from '../../query/mutations/note';
-import { H2, H4 } from '../Typographi';
+import { H2, H4 } from '../Typography';
 import { DeleteIcon, NoteLink, NoteP, NoteTime } from './NoteStyles';
 import { Btn } from '../Btn';
 import Editor from '../editor';

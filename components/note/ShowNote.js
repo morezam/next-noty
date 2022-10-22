@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import Spinner from '../spinner';
-import { client } from '../../lib/graphQlRequestDefault';
+import { client } from '@lib/graphQlRequestDefault';
 import { FaArrowAltCircleLeft } from 'react-icons/fa';
-import { queryClient } from '../../lib/queryclient';
-import { UPDATE_NOTE } from '../../query/mutations/note';
-import { GET_NOTE } from '../../query/queries/note';
+import { queryClient } from '@lib/queryclient';
+import { UPDATE_NOTE } from '@query/mutations/note';
+import { GET_NOTE } from '@query/queries/note';
 import { BackLink } from './NoteStyles';
 import Link from 'next/link';
 import DataRenderer from '../DataRenderer';

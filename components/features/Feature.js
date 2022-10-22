@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { H3 } from '../Typographi';
+import Image from 'next/image';
+import { H3 } from '../Typography';
 
 const FeatureWrapper = styled.div`
 	display: flex;
@@ -18,7 +19,6 @@ const FeatureContent = styled.div`
 `;
 const FeatureP = styled.p`
 	font-size: 2rem;
-	/* max-width: 50rem; */
 	line-height: 1.6;
 	margin: 3rem 0;
 	@media only screen and (min-width: 600px) {
@@ -44,7 +44,7 @@ const Feature = ({ title, text, src, rtl }) => {
 				<FeatureP>{text}</FeatureP>
 			</FeatureContent>
 			<FeatureMedia>
-				<FeatureImg src={src} />
+				<Image src={src} height={400} width={400} alt={title} />
 			</FeatureMedia>
 		</FeatureWrapper>
 	);

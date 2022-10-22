@@ -3,12 +3,12 @@ import mongoose from 'mongoose';
 import { ApolloServer } from 'apollo-server-micro';
 import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
 
-import { typeDefs } from '../../backend/schemas';
-import { resolvers } from '../../backend/resolvers';
+import { typeDefs } from '@backend/schemas';
+import { resolvers } from '@backend/resolvers';
 
-import { userModel } from '../../backend/models/userModel';
-import { noteModel } from '../../backend/models/noteModel';
-import { todoModel } from '../../backend/models/todoModel';
+import { userModel } from '@backend/models/userModel';
+import { noteModel } from '@backend/models/noteModel';
+import { todoModel } from '@backend/models/todoModel';
 
 const getUser = async req => {
 	const token = req.headers['token'];
@@ -42,7 +42,6 @@ const server = new ApolloServer({
 
 const startServer = server.start().then(() => {
 	mongoose.connect(`${process.env.MONGODB_CONNECTION_URL}`);
-	// mongoose.connect(``);
 });
 
 export default async function handler(req, res) {

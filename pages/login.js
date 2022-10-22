@@ -1,4 +1,4 @@
-import LoginComponent from '../components/user';
+import LoginComponent from '@components/user';
 
 const Login = () => {
 	return <LoginComponent signup={false} />;

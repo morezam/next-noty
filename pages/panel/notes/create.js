@@ -1,12 +1,14 @@
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
-import CreateNoteComponent from '../../../components/note/CreateNote';
-import { client } from '../../../lib/graphQlRequestDefault';
-import { ADD_NOTE } from '../../../query/mutations/note';
-import ParentLayout from '../../../components/layout';
-import { useAuthContext } from '../../../context/authContext';
-import Spinner from '../../../components/spinner';
 import { useCallback } from 'react';
+import Head from 'next/head';
+import CreateNoteComponent from '@components/note/CreateNote';
+import { client } from '@lib/graphQlRequestDefault';
+import { ADD_NOTE } from '@query/mutations/note';
+import ParentLayout from '@components/layout';
+import { useAuthContext } from '@context/authContext';
+import Spinner from '@components/spinner';
+import { queryClient } from '@lib/queryclient';
 
 const CreateNote = () => {
 	const router = useRouter();
@@ -20,6 +22,7 @@ const CreateNote = () => {
 		},
 		{
 			onSuccess() {
+				queryClient.invalidateQueries(['notes']);
 				router.replace('/panel');
 			},
 		}
@@ -37,6 +40,9 @@ const CreateNote = () => {
 
 	return (
 		<ParentLayout>
+			<Head>
+				<title>Add Note</title>
+			</Head>
 			<CreateNoteComponent onFormClick={onFormClick} />
 		</ParentLayout>
 	);

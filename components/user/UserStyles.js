@@ -44,11 +44,6 @@ export const PError = styled.p`
 	text-align: center;
 `;
 
-export const SpinnerWrapeer = styled.div`
-	position: absolute;
-	bottom: 1rem;
-`;
-
 export const UserP = styled.p`
 	font-size: 2.5rem;
 	color: var(--white-color);

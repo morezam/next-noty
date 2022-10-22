@@ -1,8 +1,8 @@
-import { InputWrapper, UserForm, SpinnerWrapeer, PError } from './UserStyles';
+import { useForm } from 'react-hook-form';
+import { InputWrapper, UserForm, PError } from './UserStyles';
 import Input from '../Input';
 import { Btn } from '../Btn';
-import { H2 } from '../Typographi';
-import { useForm } from 'react-hook-form';
+import { H2 } from '../Typography';
 import Spinner from '../spinner';
 
 const SignupForm = ({ onFormSubmit, signup, errorMessage, isLoading }) => {

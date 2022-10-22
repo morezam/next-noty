@@ -1,10 +1,10 @@
 import { ThemeProvider } from 'styled-components';
 import { QueryClientProvider } from '@tanstack/react-query';
-import { queryClient } from '../lib/queryclient';
-import GlobalStyle from '../components/Base';
-import { darkTheme, lightTheme } from '../components/Theme';
-import { AuthContextProvider } from '../context/authContext';
-import '../components/editor/editor.styles.css';
+import { queryClient } from '@lib/queryclient';
+import GlobalStyle from '@components/Base';
+import { lightTheme } from '@components/Theme';
+import { AuthContextProvider } from '@context/authContext';
+import '@components/editor/editor.styles.css';
 
 function MyApp({ Component, pageProps }) {
 	return (

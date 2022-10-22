@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import Nav from '../nav';
 import {
 	HomeWrapper,
 	HomeContent,
@@ -8,7 +7,7 @@ import {
 	LinkButton,
 	LinkWrapper,
 } from './HomeStyles';
-import { H1 } from '../Typographi';
+import { H1 } from '../Typography';
 import Features from '../features/Features';
 import FooterComponent from '../footer';
 import Logo from '../Logo';
@@ -16,7 +15,6 @@ import Logo from '../Logo';
 const Home = () => {
 	return (
 		<>
-			{/* <Nav /> */}
 			<Logo />
 			<HomeWrapper>
 				<HomeContent>

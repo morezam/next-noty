@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { queryClient } from '../../lib/queryclient';
-import { client } from '../../lib/graphQlRequestDefault';
+import { queryClient } from '@lib/queryclient';
+import { client } from '@lib/graphQlRequestDefault';
 import { FaCheckCircle } from 'react-icons/fa';
-import { UPDATE_TODO } from '../../query/mutations/todo';
+import { UPDATE_TODO } from '@query/mutations/todo';
 import { UpdateInput, TodoWrapper } from './TodoStyles';
 
 const Input = ({ todo, children }) => {

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FaBookOpen } from 'react-icons/fa';
+import Image from 'next/image';
 
 export const LogoWrapper = styled.div`
 	font-size: 2.5rem;
@@ -17,7 +17,8 @@ export const LogoWrapper = styled.div`
 const Logo = () => {
 	return (
 		<LogoWrapper>
-			<FaBookOpen /> <span style={{ visibility: 'hidden' }}>..</span>
+			<Image src="/logo.svg" alt={`Noty's logo`} height={30} width={30} />{' '}
+			<span style={{ visibility: 'hidden' }}>.</span>
 			<p> NOTY</p>
 		</LogoWrapper>
 	);

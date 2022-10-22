@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
-import { queryClient } from '../../lib/queryclient';
-import { client } from '../../lib/graphQlRequestDefault';
-import { DELETE_TODO } from '../../query/mutations/todo';
 import { FaTrash } from 'react-icons/fa';
+import { queryClient } from '@lib/queryclient';
+import { client } from '@lib/graphQlRequestDefault';
+import { DELETE_TODO } from '@query/mutations/todo';
 
 const DeleteTodo = ({ todoId }) => {
 	const mutation = useMutation(

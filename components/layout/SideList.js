@@ -1,10 +1,11 @@
 import Link from 'next/link';
+import { memo } from 'react';
 import { FaRegListAlt, FaRegPlusSquare, FaTasks } from 'react-icons/fa';
 import Logo from '../Logo';
 import LogOut from '../user/LogOut';
 import { StyledLink, Ul } from './SideListStyles';
 
-const SideList = () => {
+const SideList = memo(() => {
 	return (
 		<Ul>
 			<li style={{ paddingBottom: '2rem' }}>
@@ -43,6 +44,8 @@ const SideList = () => {
 			</li>
 		</Ul>
 	);
-};
+});
+
+SideList.displayName = 'SideList';
 
 export default SideList;

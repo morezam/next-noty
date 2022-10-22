@@ -1,10 +1,10 @@
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
-import Spinner from '../spinner';
-import { useAuthContext } from '../../context/authContext';
-import { AuthActionKind } from '../../context/authReducer';
-import { client } from '../../lib/graphQlRequestDefault';
-import { SIGN_UP, LOG_IN } from '../../query/mutations/user';
+import Head from 'next/head';
+import { useAuthContext } from '@context/authContext';
+import { AuthActionKind } from '@context/authReducer';
+import { client } from '@lib/graphQlRequestDefault';
+import { SIGN_UP, LOG_IN } from '@query/mutations/user';
 import SignupForm from './SignupForm';
 
 const UserSign = ({ signup }) => {
@@ -32,6 +32,15 @@ const UserSign = ({ signup }) => {
 
 	return (
 		<div>
+			<Head>
+				<title>{signup ? 'Signup' : 'Login'} | Noty</title>
+				<meta
+					name="description"
+					content={`${
+						signup ? 'Create a new account' : 'Login to your account'
+					} and enjoy Noty.`}
+				/>
+			</Head>
 			<SignupForm
 				signup={signup}
 				onFormSubmit={onFormSubmit}

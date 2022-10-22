@@ -1,4 +1,5 @@
 import { PError, Input, Label } from './user/UserStyles';
+
 const InputComponent = ({
 	type,
 	register,

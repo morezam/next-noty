@@ -1,11 +1,11 @@
 import { useMutation } from '@tanstack/react-query';
 import { FaCheck } from 'react-icons/fa';
-import { client } from '../../lib/graphQlRequestDefault';
-import { CHANGE_COMPLETED } from '../../query/mutations/todo';
+import { client } from '@lib/graphQlRequestDefault';
+import { CHANGE_COMPLETED } from '@query/mutations/todo';
 import UpdateTodo from './UpdateTodo';
 import DeleteTodo from './DeleteTodo';
 import { CheckWrapper, TodoLi } from './TodoStyles';
-import { queryClient } from '../../lib/queryclient';
+import { queryClient } from '@lib/queryclient';
 
 const Todo = ({ todo }) => {
 	const mutation = useMutation(

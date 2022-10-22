@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { queryClient } from '../../lib/queryclient';
-import { client } from '../../lib/graphQlRequestDefault';
-import { CREATE_TODO } from '../../query/mutations/todo';
-import { useAuthContext } from '../../context/authContext';
+import { queryClient } from '@lib/queryclient';
+import { client } from '@lib/graphQlRequestDefault';
+import { CREATE_TODO } from '@query/mutations/todo';
+import { useAuthContext } from '@context/authContext';
 import { Btn } from '../Btn';
 import { TodoInput, TodoForm } from './TodoStyles';
-import Spinner from '../spinner';
 
 const CreateTodo = () => {
 	const [title, setTitle] = useState('');
